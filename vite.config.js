@@ -8,6 +8,5 @@ const repoName = path.basename(process.cwd());
 
 export default defineConfig(({ mode }) => ({
   plugins: [tailwindcss(), vue()],
-  base: mode === "production" ? `/` : "/",
-  // base: mode === "production" ? `/${repoName}/` : "/",
+  base: mode === "production" ? `/${repoName}/` : "/",
 }));
