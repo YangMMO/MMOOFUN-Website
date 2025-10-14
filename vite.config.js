@@ -1,9 +1,12 @@
 import { defineConfig } from "vite";
-import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
 
-// https://vite.dev/config/
-export default defineConfig({
+// 获取当前仓库名
+const repoName = path.basename(process.cwd());
+
+export default defineConfig(({ mode }) => ({
   plugins: [tailwindcss(), vue()],
-  base: "/MMOOFUN-Website/"
-});
+  base: mode === "production" ? `/${repoName}/` : "/", // ✅ mode 在这里是参数
+}));
