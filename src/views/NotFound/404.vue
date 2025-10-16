@@ -83,7 +83,7 @@ onMounted(() => {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 
 .logo {
   width: 200px;
