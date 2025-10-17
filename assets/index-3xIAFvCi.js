@@ -1,0 +1,1 @@
+import{_ as e,c,o as t}from"./index-B6P_DMVn.js";const o={},r={class:"text-error"};function s(_,n){return t(),c("div",r," 123 ")}const d=e(o,[["render",s],["__scopeId","data-v-3de547e2"]]);export{d as default};
