@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
+    "@vueuse/core": "^13.9.0",
     "daisyui": "^5.2.3",
     "gsap": "^3.13.0",
     "mingcute_icon": "^2.9.6",

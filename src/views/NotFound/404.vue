@@ -5,17 +5,20 @@
       <div className="absolute bottom-0 left-0 right-0 top-0 bg-radial-[at_50%_10%] from-[rgba(255,255,255,0.3)] from-40% to-[rgba(255,255,255,1)] to-100%"></div>
     </div>
     
-    <div class="h-screen w-screen flex justify-center items-center flex-col gap-16">
-      <svg class="logo" width="545" height="545" viewBox="0 0 545 545" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path class="draw-line" d="M95.3553 308.193L24.6447 378.904C5.11845 398.43 5.11844 430.088 24.6447 449.614L95.3553 520.325C114.882 539.851 146.54 539.851 166.066 520.325L236.777 449.614C256.303 430.088 287.961 430.088 307.487 449.614L378.198 520.325C397.724 539.851 429.383 539.851 448.909 520.325L519.619 449.614C539.146 430.088 539.146 398.43 519.619 378.904L448.909 308.193C429.383 288.667 429.383 257.009 448.909 237.482L519.619 166.772C539.146 147.245 539.146 115.587 519.619 96.061L448.909 25.3504C429.383 5.82414 397.724 5.82413 378.198 25.3504L307.487 96.061C287.961 115.587 256.303 115.587 236.777 96.061L166.066 25.3504C146.54 5.82414 114.882 5.82415 95.3553 25.3504L24.6447 96.061C5.11844 115.587 5.11845 147.245 24.6447 166.772L95.3553 237.482"/>
-        <path class="draw-line" d="M179.293 444.525H149.293C121.679 444.525 99.2928 422.139 99.2928 394.525V364.525M362.76 444.912H392.76C420.374 444.912 442.76 422.527 442.76 394.912V364.912M363.148 101.8H393.148C420.762 101.8 443.148 124.186 443.148 151.8V181.8M179.681 101.413L149.681 101.413C122.067 101.413 99.6815 123.798 99.6815 151.413V181.413M342.843 343.548C303.79 382.601 240.474 382.601 201.421 343.548C162.369 304.496 162.369 241.179 201.421 202.127C240.474 163.075 303.79 163.075 342.843 202.127C381.895 241.179 381.895 304.496 342.843 343.548Z"/>
+    <div class="h-screen w-screen flex justify-center items-center flex-col gap-8">
+      <svg class="logo" width="620" height="620" viewBox="0 0 620 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect class="draw-line" x="210" y="210" width="200" height="200" rx="100" stroke="black" stroke-width="20"/>
+        <rect class="draw-line" x="10" y="10" width="600" height="600" rx="300" stroke="black" stroke-width="20"/>
+        <path class="draw-line" d="M210 510C210 565.228 254.772 610 310 610C365.228 610 410 565.228 410 510V460C410 432.386 432.386 410 460 410H510C565.228 410 610 365.228 610 310C610 254.772 565.228 210 510 210M110 410C54.7715 410 10 365.228 10 310C10 254.772 54.7715 210 110 210H160C187.614 210 210 187.614 210 160V110C210 54.7715 254.772 10 310 10C365.228 10 410 54.7715 410 110" stroke="black" stroke-width="20" stroke-linecap="round"/>
+        <path class="draw-line" d="M337.853 496L316.64 517.213C312.734 521.118 306.403 521.118 302.497 517.213L281.284 496M281.284 124L302.497 102.787C306.403 98.8815 312.734 98.8815 316.64 102.787L337.853 124M124 337.853L102.787 316.64C98.8816 312.734 98.8816 306.403 102.787 302.497L124 281.284M496 281.284L517.213 302.497C521.118 306.403 521.118 312.734 517.213 316.64L496 337.853" stroke="black" stroke-width="20" stroke-linecap="round"/>
       </svg>
 
-      <div class="prose text-center ">
-          <h1>404</h1>
-          <p>查找的内容不在哦！</p>
-          <button class="btn btn-xl btn-neutral btn-dash mt-6" @click="handleReturnHomePage">回到首页</button>
-        </div>
+
+      <div class="prose text-center">
+        <h1>404</h1>
+        <p>查找的内容不在哦！</p>
+        <button class="btn btn-xl btn-neutral btn-dash mt-4" @click="handleReturnHomePage">回到首页</button>
+      </div>
 
       <div class="mockup-window bg-base-100 border border-base-300 w-full max-w-3xl prose text-center ">
         <div class="grid place-content-center h-20">
@@ -30,20 +33,25 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import { useRouter } from 'vue-router'
-import gsap from 'gsap'
-import DrawSVGPlugin from 'gsap/DrawSVGPlugin.js'
 
 const router = useRouter()
-gsap.registerPlugin(DrawSVGPlugin)
+const gsap = inject('gsap')
+const CustomBounce = inject('CustomBounce')
 
 function handleReturnHomePage() {
   router.push('/')
 }
 
 onMounted(() => {
-  gsap.set(".logo", { opacity: 0, rotation: 0, transformOrigin: "center center" })
+  CustomBounce.create("CusBounce", {
+    strength: 0.6,
+    squash: 3,
+    squashID: "CusBounce-squash",
+  });
+
+  gsap.set(".logo", { opacity: 0, transformOrigin: "center center" })
   gsap.set(".draw-line", { visibility: "visible" })
 
   const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 })
@@ -51,7 +59,6 @@ onMounted(() => {
   // 渐隐显示 + 旋转45° + 绘制线条
   tl.to(".logo", {
     opacity: 1,
-    rotation: 45,
     duration: 1,
     ease: "power2.inOut"
   })
@@ -61,24 +68,12 @@ onMounted(() => {
     ease: "power2.inOut",
     stagger: 0.1
   }, "<") // "<" 表示同时执行
-  // 回退45°
   .to(".logo", {
-    rotation: "-=45",
+    rotation: "+=45",
     duration: 1,
-    ease: "power2.inOut"
+    ease: "CusBounce"
   })
-  // 旋转一圈
-  .to(".logo", {
-    rotation: "+=360",
-    duration: 2,
-    ease: "power2.inOut"
-  })
-  // 渐隐消失
-  .to(".logo", {
-    opacity: 0,
-    duration: 2,
-    ease: "power1.inOut"
-  })
+
 })
 </script>
 
