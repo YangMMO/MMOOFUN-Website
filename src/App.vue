@@ -6,20 +6,25 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, provide } from 'vue'
+
+
+// gsap配置
 import gsap from 'gsap'
 import DrawSVGPlugin from 'gsap/DrawSVGPlugin.js'
 import MorphSVGPlugin from 'gsap/MorphSVGPlugin.js'
 import CustomEase from 'gsap/CustomEase.js'
 import CustomBounce from 'gsap/CustomBounce.js'
+import ScrollToPlugin from 'gsap/ScrollToPlugin'
 
-// gsap配置
-gsap.registerPlugin(DrawSVGPlugin, MorphSVGPlugin, CustomEase, CustomBounce)
+gsap.registerPlugin(DrawSVGPlugin, MorphSVGPlugin, CustomEase, CustomBounce, ScrollToPlugin)
 
 provide('gsap', gsap)
 provide('DrawSVGPlugin', DrawSVGPlugin)
 provide('MorphSVGPlugin', MorphSVGPlugin)
 provide('CustomEase', CustomEase)
 provide('CustomBounce', CustomBounce)
+provide('ScrollToPlugin', ScrollToPlugin)
+
 
 // 主题配置
 const themeMode = ref('light') // 默认值设为 'light'

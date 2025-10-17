@@ -88,3 +88,18 @@
   color: inherit !important;
 }
 
+
+/* 在 main.css 或全局样式文件中 */
+[class^="mgc_"], [class*=" mgc_"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -1px; /* 微调值，根据实际情况调整 */
+}
+
+/* 或者使用 transform */
+[class^="mgc_"], [class*=" mgc_"] {
+  display: inline-block;
+  /* transform: translateY(-0.03em); */
+}
